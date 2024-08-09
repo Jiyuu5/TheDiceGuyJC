@@ -9,13 +9,13 @@ import androidx.navigation.compose.composable
 fun NavigationGraph(navController: NavHostController){
     NavHost(navController = navController, startDestination = Routes.Set1.route) {
         composable(Routes.Set1.route){
-            Set1Ui()
+            SetUi(set = "Set 1")
         }
         composable(Routes.Set2.route){
-            Set2Ui()
+            SetUi(set = "Set 2")
         }
         composable(Routes.Set3.route){
-            Set3Ui()
+            SetUi(set = "Set 3")
         }
         composable(Routes.HistoryUi.route){
             HistoryUi()
