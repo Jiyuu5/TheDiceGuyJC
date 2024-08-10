@@ -33,15 +33,6 @@ fun MainUi() {
     }
 }
 
-@Composable
-fun TopNavigation(){
-
-}
-
-@Composable
-fun Content(){
-
-}
 
 @Composable
 fun BottomNavigationBar(navController: NavController){
