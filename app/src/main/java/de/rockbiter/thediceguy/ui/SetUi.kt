@@ -1,5 +1,7 @@
 package de.rockbiter.thediceguy.ui
 
+import android.app.AlertDialog
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -31,53 +35,56 @@ import de.rockbiter.thediceguy.model.Dice
 
 
 @Composable
-fun SetUi(set: Int){
+fun SetUi(set: Int) {
 
-    val dicesOnScreen = remember {
-        mutableStateListOf<Dice>()
-    }
-    var score by remember {
-        mutableIntStateOf(0)
-    }
+    val dicesOnScreen = remember { mutableStateListOf<Dice>() }
+    var score by remember { mutableIntStateOf(0) }
+    var isAlertDialogOpen by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier
-        .padding(8.dp)
-        .fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxSize()
+    ) {
         Text(text = "Set $set", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
-        Row (verticalAlignment = Alignment.CenterVertically,modifier = Modifier.fillMaxWidth()){
-            Text(text = score.toString(), modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f))
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = score.toString(), modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            )
             IconButton(
                 onClick = { /*TODO*/ }) {
-                Icon(painter = painterResource(id = R.drawable.more_vert_32), contentDescription = "Set Menu")
+                Icon(
+                    painter = painterResource(id = R.drawable.more_vert_32),
+                    contentDescription = "Set Menu"
+                )
             }
         }
 
-        LazyVerticalGrid(state = LazyGridState(), columns = GridCells.Adaptive(minSize = 48.dp), modifier = Modifier
-            .fillMaxWidth()
-            .weight(1f)) {
-            items(dicesOnScreen){
+        LazyVerticalGrid(
+            state = LazyGridState(),
+            columns = GridCells.Adaptive(minSize = 48.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            items(dicesOnScreen) {
                 DiceItem(imageResource = it.getImageResource(), Modifier.padding(4.dp))
             }
         }
-        Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
+        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
             Button(onClick = { dicesOnScreen.clear() }) {
                 Text(text = "Delete")
             }
             Button(onClick = {
-                dicesOnScreen.add(Dice(6, "blue"))
-                var sum = 0
-                for (dice in dicesOnScreen){
-                    sum += dice.getValue()
-                }
-                score = sum
+                isAlertDialogOpen = true
             }) {
                 Text(text = "Dice")
             }
             Button(onClick = {
                 var sum = 0
-                for (dice in dicesOnScreen){
+                for (dice in dicesOnScreen) {
                     dice.roll()
                     sum += dice.getValue()
                 }
@@ -88,11 +95,85 @@ fun SetUi(set: Int){
             }
         }
     }
+    if (isAlertDialogOpen) {
+        AlertDialog(
+            title = { Text(text = "Add Dice") },
+            text = {
+                Row {
+                    IconButton(onClick = {
+                        dicesOnScreen.add(Dice(6, "white"))
+                        var sum = 0
+                        for (dice in dicesOnScreen) {
+                            sum += dice.getValue()
+                        }
+                        score = sum
+                    }) {
+                        Image(
+                            painter = painterResource(id = R.drawable.dice6_3),
+                            contentDescription = "White Dice"
+                        )
+                    }
+
+                    IconButton(onClick = {
+                        dicesOnScreen.add(Dice(6, "blue"))
+                        var sum = 0
+                        for (dice in dicesOnScreen) {
+                            sum += dice.getValue()
+                        }
+                        score = sum
+                    }) {
+                        Image(
+                            painter = painterResource(id = R.drawable.dice6_3_blue),
+                            contentDescription = "White Dice"
+                        )
+                    }
+
+                    IconButton(onClick = {
+                        dicesOnScreen.add(Dice(6, "red"))
+                        var sum = 0
+                        for (dice in dicesOnScreen) {
+                            sum += dice.getValue()
+                        }
+                        score = sum
+                    }) {
+                        Image(
+                            painter = painterResource(id = R.drawable.dice6_3_red),
+                            contentDescription = "White Dice"
+
+                        )
+                    }
+
+                    IconButton(onClick = {
+                        dicesOnScreen.add(Dice(6, "green"))
+                        var sum = 0
+                        for (dice in dicesOnScreen) {
+                            sum += dice.getValue()
+                        }
+                        score = sum
+                    }) {
+                        Image(
+                            painter = painterResource(id = R.drawable.dice6_3_green),
+                            contentDescription = "White Dice"
+                        )
+                    }
+                }
+
+            },
+            onDismissRequest = { isAlertDialogOpen = false },
+            confirmButton = {
+                Button(onClick = { isAlertDialogOpen = false }
+                ) {
+                    Text(text = "Close")
+                }
+            })
+    }
+
 
 }
 
-@Preview (showBackground = true)
+
+@Preview(showBackground = true)
 @Composable
-fun PreviewSetUi(){
+fun PreviewSetUi() {
     MainUi()
 }
