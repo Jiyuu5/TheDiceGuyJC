@@ -24,7 +24,7 @@ import de.rockbiter.thediceguy.R
 import de.rockbiter.thediceguy.data.diceSets
 import de.rockbiter.thediceguy.model.Dice
 
-val dices2 = diceSets[0].diceArrayList
+val dicesOnScreen = diceSets[0].diceArrayList
 
 @Composable
 fun SetUi(set: String){
@@ -44,16 +44,15 @@ fun SetUi(set: String){
         LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 64.dp), modifier = Modifier
             .fillMaxWidth()
             .weight(1f)) {
-            items(dices2){
-                it ->
+            items(dicesOnScreen){
                 DiceItem(imageResource = it.getImageResource())
             }
         }
         Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = { dicesOnScreen.clear() }) {
                 Text(text = "Delete")
             }
-            Button(onClick = { dices2.add(Dice(6, "blue")) }) {
+            Button(onClick = { dicesOnScreen.add(Dice(6, "blue")) }) {
                 Text(text = "Dice")
             }
             Button(onClick = { /*TODO*/ }) {
