@@ -33,15 +33,12 @@ import de.rockbiter.thediceguy.model.Dice
 @Composable
 fun SetUi(set: Int){
 
-
     val dicesOnScreen = remember {
         mutableStateListOf<Dice>()
     }
     var score by remember {
         mutableIntStateOf(0)
     }
-
-
 
     Column(modifier = Modifier
         .padding(8.dp)
@@ -61,7 +58,7 @@ fun SetUi(set: Int){
             .fillMaxWidth()
             .weight(1f)) {
             items(dicesOnScreen){
-                DiceItem(imageResource = it.getImageResource())
+                DiceItem(imageResource = it.getImageResource(), Modifier.padding(4.dp))
             }
         }
         Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
@@ -92,9 +89,7 @@ fun SetUi(set: Int){
         }
     }
 
-
 }
-
 
 @Preview (showBackground = true)
 @Composable
