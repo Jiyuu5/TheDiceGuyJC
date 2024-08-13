@@ -1,6 +1,5 @@
 package de.rockbiter.thediceguy.ui
 
-import android.app.AlertDialog
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,8 +36,8 @@ import de.rockbiter.thediceguy.model.Dice
 @Composable
 fun SetUi(set: Int) {
 
-    val dicesOnScreen = remember { mutableStateListOf<Dice>() }
-    var score by remember { mutableIntStateOf(0) }
+    val diceOnScreen = remember { mutableStateListOf<Dice>() }
+    var scoreAll by remember { mutableIntStateOf(0) }
     var isAlertDialogOpen by remember { mutableStateOf(false) }
 
     Column(
@@ -49,7 +48,7 @@ fun SetUi(set: Int) {
         Text(text = "Set $set", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = score.toString(), modifier = Modifier
+                text = scoreAll.toString(), modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             )
@@ -69,12 +68,12 @@ fun SetUi(set: Int) {
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            items(dicesOnScreen) {
+            items(diceOnScreen) {
                 DiceItem(imageResource = it.getImageResource(), Modifier.padding(4.dp))
             }
         }
         Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            Button(onClick = { dicesOnScreen.clear() }) {
+            Button(onClick = { diceOnScreen.clear() }) {
                 Text(text = "Delete")
             }
             Button(onClick = {
@@ -84,12 +83,12 @@ fun SetUi(set: Int) {
             }
             Button(onClick = {
                 var sum = 0
-                for (dice in dicesOnScreen) {
+                for (dice in diceOnScreen) {
                     dice.roll()
                     sum += dice.getValue()
                 }
-                dicesOnScreen.shuffle()
-                score = sum
+                diceOnScreen.shuffle()
+                scoreAll = sum
             }) {
                 Text(text = "Roll")
             }
@@ -101,12 +100,12 @@ fun SetUi(set: Int) {
             text = {
                 Row {
                     IconButton(onClick = {
-                        dicesOnScreen.add(Dice(6, "white"))
+                        diceOnScreen.add(Dice(6, "white"))
                         var sum = 0
-                        for (dice in dicesOnScreen) {
+                        for (dice in diceOnScreen) {
                             sum += dice.getValue()
                         }
-                        score = sum
+                        scoreAll = sum
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3),
@@ -115,12 +114,12 @@ fun SetUi(set: Int) {
                     }
 
                     IconButton(onClick = {
-                        dicesOnScreen.add(Dice(6, "blue"))
+                        diceOnScreen.add(Dice(6, "blue"))
                         var sum = 0
-                        for (dice in dicesOnScreen) {
+                        for (dice in diceOnScreen) {
                             sum += dice.getValue()
                         }
-                        score = sum
+                        scoreAll = sum
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_blue),
@@ -129,12 +128,12 @@ fun SetUi(set: Int) {
                     }
 
                     IconButton(onClick = {
-                        dicesOnScreen.add(Dice(6, "red"))
+                        diceOnScreen.add(Dice(6, "red"))
                         var sum = 0
-                        for (dice in dicesOnScreen) {
+                        for (dice in diceOnScreen) {
                             sum += dice.getValue()
                         }
-                        score = sum
+                        scoreAll = sum
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_red),
@@ -144,12 +143,12 @@ fun SetUi(set: Int) {
                     }
 
                     IconButton(onClick = {
-                        dicesOnScreen.add(Dice(6, "green"))
+                        diceOnScreen.add(Dice(6, "green"))
                         var sum = 0
-                        for (dice in dicesOnScreen) {
+                        for (dice in diceOnScreen) {
                             sum += dice.getValue()
                         }
-                        score = sum
+                        scoreAll = sum
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_green),
