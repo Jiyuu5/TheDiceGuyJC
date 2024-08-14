@@ -1,6 +1,6 @@
 package de.rockbiter.thediceguy.ui
 
-import de.rockbiter.thediceguy.data.DiceSet
+import de.rockbiter.thediceguy.model.DiceSet
 
 data class SetUiState(
     val scoreAll: Int = 0,

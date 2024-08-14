@@ -1,7 +1,7 @@
 package de.rockbiter.thediceguy.ui
 
 import androidx.lifecycle.ViewModel
-import de.rockbiter.thediceguy.data.diceSets
+import de.rockbiter.thediceguy.data.dicePresets
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +18,7 @@ class SetViewModel : ViewModel() {
     private fun loadSetPresets() {
             _uiState.update { currentState ->
                 currentState.copy(
-                    activeDiceSet = diceSets[0]
+                    activeDiceSet = dicePresets[0]
                 )
             }
     }
