@@ -7,6 +7,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun MenuUi(){
     Column {
-        Text(text = "MenuUi")
+        Text(text = "MenuUi not implemented")
     }
 }

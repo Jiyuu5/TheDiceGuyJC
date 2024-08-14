@@ -7,6 +7,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun HistoryUi(){
     Column {
-        Text(text = "HistoryUi")
+        Text(text = "HistoryUi not implemented")
     }
 }
