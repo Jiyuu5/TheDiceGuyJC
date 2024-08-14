@@ -21,10 +21,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.rockbiter.thediceguy.R
 
@@ -43,8 +49,55 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
             Text(
                 text = setUiState.scoreAll.toString(), modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                fontSize = 28.sp
             )
+            if (setUiState.scoreRed > 0){
+                Text(
+                    text = setUiState.scoreRed.toString(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    fontSize = 24.sp,
+                    color = colorResource(id = R.color.red),
+                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.red), offset = Offset.Zero,3.0f))
+                )
+            }
+            if (setUiState.scoreBlue > 0){
+                Text(
+                    text = setUiState.scoreBlue.toString(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    fontSize = 24.sp,
+                    color = colorResource(id = R.color.blue),
+                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.blue), offset = Offset.Zero,3.0f))
+                )
+            }
+            if (setUiState.scoreGreen > 0){
+                Text(
+                    text = setUiState.scoreGreen.toString(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    fontSize = 24.sp,
+                    color = colorResource(id = R.color.green),
+                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.green), offset = Offset.Zero,3.0f))
+                )
+            }
+            if (setUiState.scoreWhite > 0){
+                Text(
+                    text = setUiState.scoreWhite.toString(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    fontSize = 24.sp,
+                    color = colorResource(id = R.color.white),
+                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.white), offset = Offset.Zero,3.0f))
+                )
+            }
+
+
             IconButton(
                 onClick = { /*TODO*/ }) {
                 Icon(
