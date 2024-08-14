@@ -9,5 +9,7 @@ data class SetUiState(
     val scoreBlue: Int = 0,
     val scoreGreen: Int = 0,
     val isDiceDialogOpen: Boolean = false,
+    val isRollButtonClickedFirst: Boolean = true,
+    val textRollButton: String = "Roll",
     val activeDiceSet: DiceSet = DiceSet("", listOf()),
 )

@@ -22,7 +22,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -129,15 +128,8 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
             }
             Button(onClick = {
                 setViewModel.rollDice()
-//                var sum = 0
-//                for (dice in diceOnScreen) {
-//                    dice.roll()
-//                    sum += dice.getValue()
-//                }
-//                diceOnScreen.shuffle()
-//                scoreAll = sum
             }) {
-                Text(text = "Roll")
+                Text(text = setUiState.textRollButton)
             }
         }
     }

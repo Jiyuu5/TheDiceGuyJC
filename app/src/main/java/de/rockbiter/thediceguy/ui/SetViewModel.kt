@@ -1,29 +1,33 @@
 package de.rockbiter.thediceguy.ui
 
 import androidx.lifecycle.ViewModel
-import de.rockbiter.thediceguy.data.dicePresets
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.rockbiter.thediceguy.model.Dice
 import de.rockbiter.thediceguy.model.DiceSet
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.util.Timer
+import kotlin.concurrent.fixedRateTimer
 
 class SetViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(SetUiState())
     val uiState: StateFlow<SetUiState> = _uiState.asStateFlow()
 
-    init {
-        //loadSetPresets(0)
-    }
+    private lateinit var timer: Timer
 
-    fun loadSetPresets(preset: Int) {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    activeDiceSet = dicePresets[preset]
-                )
-            }
-    }
+//    init {
+//        loadSetPresets(0)
+//    }
+
+//    fun loadSetPresets(preset: Int) {
+//            _uiState.update { currentState ->
+//                currentState.copy(
+//                    activeDiceSet = dicePresets[preset]
+//                )
+//            }
+//    }
 
     fun clearDiceSet(){
         _uiState.update { currentState ->
@@ -69,21 +73,58 @@ class SetViewModel : ViewModel() {
     }
 
     fun rollDice(){
-        val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
-        for (dice in tempDiceSetList){
-            dice.roll()
+        if (uiState.value.activeDiceSet.diceList.isNotEmpty()){
+            if (uiState.value.isRollButtonClickedFirst){
+                _uiState.update { currentStatus ->
+                    currentStatus.copy(
+                        isRollButtonClickedFirst = false,
+                        textRollButton = "Stop"
+                    )
+                }
+                timer = fixedRateTimer(period = 100L){
+                    val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
+                    for (dice in tempDiceSetList){
+                        dice.roll()
+                    }
+                    tempDiceSetList.shuffle()
+                    val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            activeDiceSet = tempDiceSet
+                        )
+                    }
+                }
+            } else {
+                _uiState.update { currentStatus ->
+                    currentStatus.copy(
+                        isRollButtonClickedFirst = true,
+                        textRollButton = "Roll"
+
+                    )
+                }
+                timer.cancel()
+            }
         }
-        tempDiceSetList.shuffle()
-        val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
-        _uiState.update { currentState ->
-            currentState.copy(
-                activeDiceSet = tempDiceSet
-            )
-        }
+
+
+
+//        val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
+//        for (dice in tempDiceSetList){
+//            dice.roll()
+//        }
+//        tempDiceSetList.shuffle()
+//        val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
+//        _uiState.update { currentState ->
+//            currentState.copy(
+//                activeDiceSet = tempDiceSet
+//            )
+//        }
+
+
         calculateScores()
     }
 
-    fun calculateScores(){
+    private fun calculateScores(){
         val tempDiceSetList = uiState.value.activeDiceSet.diceList
         var sum = 0
         var sumWhite = 0
