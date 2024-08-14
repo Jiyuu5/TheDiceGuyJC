@@ -19,11 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -32,26 +27,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.rockbiter.thediceguy.R
-import de.rockbiter.thediceguy.model.Dice
 
 
 @Composable
 fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
     val setUiState by setViewModel.uiState.collectAsState()
 
-    val diceOnScreen = remember { mutableStateListOf<Dice>() }
-    var scoreAll by remember { mutableIntStateOf(0) }
-    var isAlertDialogOpen by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()
     ) {
-        Text(text = "Set $set", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Text(text = setUiState.activeDiceSet.name, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = scoreAll.toString(), modifier = Modifier
+                text = setUiState.scoreAll.toString(), modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             )
@@ -71,44 +61,40 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            items(diceOnScreen) {
+            items(setUiState.activeDiceSet.diceList) {
                 DiceItem(imageResource = it.getImageResource(), Modifier.padding(4.dp))
             }
         }
         Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            Button(onClick = { diceOnScreen.clear() }) {
+            Button(onClick = { setViewModel.clearDiceSet() }) {
                 Text(text = "Delete")
             }
             Button(onClick = {
-                isAlertDialogOpen = true
+                setViewModel.openDiceDialog()
             }) {
                 Text(text = "Dice")
             }
             Button(onClick = {
-                var sum = 0
-                for (dice in diceOnScreen) {
-                    dice.roll()
-                    sum += dice.getValue()
-                }
-                diceOnScreen.shuffle()
-                scoreAll = sum
+                setViewModel.rollDice()
+//                var sum = 0
+//                for (dice in diceOnScreen) {
+//                    dice.roll()
+//                    sum += dice.getValue()
+//                }
+//                diceOnScreen.shuffle()
+//                scoreAll = sum
             }) {
                 Text(text = "Roll")
             }
         }
     }
-    if (isAlertDialogOpen) {
+    if (setUiState.isDiceDialogOpen) {
         AlertDialog(
             title = { Text(text = "Add Dice") },
             text = {
                 Row {
                     IconButton(onClick = {
-                        diceOnScreen.add(Dice(6, "white"))
-                        var sum = 0
-                        for (dice in diceOnScreen) {
-                            sum += dice.getValue()
-                        }
-                        scoreAll = sum
+                        setViewModel.addDice("white")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3),
@@ -117,12 +103,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     }
 
                     IconButton(onClick = {
-                        diceOnScreen.add(Dice(6, "blue"))
-                        var sum = 0
-                        for (dice in diceOnScreen) {
-                            sum += dice.getValue()
-                        }
-                        scoreAll = sum
+                        setViewModel.addDice("blue")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_blue),
@@ -131,12 +112,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     }
 
                     IconButton(onClick = {
-                        diceOnScreen.add(Dice(6, "red"))
-                        var sum = 0
-                        for (dice in diceOnScreen) {
-                            sum += dice.getValue()
-                        }
-                        scoreAll = sum
+                        setViewModel.addDice("red")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_red),
@@ -146,12 +122,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     }
 
                     IconButton(onClick = {
-                        diceOnScreen.add(Dice(6, "green"))
-                        var sum = 0
-                        for (dice in diceOnScreen) {
-                            sum += dice.getValue()
-                        }
-                        scoreAll = sum
+                        setViewModel.addDice("green")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_green),
@@ -161,9 +132,13 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                 }
 
             },
-            onDismissRequest = { isAlertDialogOpen = false },
+            onDismissRequest = {
+                setViewModel.closeDiceDialog()
+            },
             confirmButton = {
-                Button(onClick = { isAlertDialogOpen = false }
+                Button(onClick = {
+                    setViewModel.closeDiceDialog()
+                }
                 ) {
                     Text(text = "Close")
                 }

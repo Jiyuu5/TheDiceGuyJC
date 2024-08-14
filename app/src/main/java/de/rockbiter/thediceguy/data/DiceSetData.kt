@@ -5,7 +5,7 @@ import de.rockbiter.thediceguy.model.DiceSet
 
 
 var dicePresets = listOf(
-    DiceSet(listOf(Dice(6, "white"))),
-    DiceSet(listOf(Dice(6, "green"), Dice(6,"blue"))),
-    DiceSet(listOf(Dice(6, "red"), Dice(6,"blue")))
+    DiceSet("Preset 1", listOf(Dice(6, "white"))),
+    DiceSet("Preset 2", listOf(Dice(6, "green"), Dice(6,"blue"))),
+    DiceSet("Preset 3", listOf(Dice(6, "red"), Dice(6,"blue")))
 )

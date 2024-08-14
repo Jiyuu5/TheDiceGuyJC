@@ -2,6 +2,8 @@ package de.rockbiter.thediceguy.ui
 
 import androidx.lifecycle.ViewModel
 import de.rockbiter.thediceguy.data.dicePresets
+import de.rockbiter.thediceguy.model.Dice
+import de.rockbiter.thediceguy.model.DiceSet
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,14 +14,106 @@ class SetViewModel : ViewModel() {
     val uiState: StateFlow<SetUiState> = _uiState.asStateFlow()
 
     init {
-        loadSetPresets()
+        //loadSetPresets(0)
     }
 
-    private fun loadSetPresets() {
+    fun loadSetPresets(preset: Int) {
             _uiState.update { currentState ->
                 currentState.copy(
-                    activeDiceSet = dicePresets[0]
+                    activeDiceSet = dicePresets[preset]
                 )
             }
+    }
+
+    fun clearDiceSet(){
+        _uiState.update { currentState ->
+            currentState.copy(
+                activeDiceSet = DiceSet(uiState.value.activeDiceSet.name, listOf()),
+                scoreAll = 0,
+                scoreRed = 0,
+                scoreWhite = 0,
+                scoreGreen = 0,
+                scoreBlue = 0
+            )
+
+        }
+    }
+
+    fun openDiceDialog() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                isDiceDialogOpen = true
+            )
+        }
+    }
+
+    fun closeDiceDialog() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                isDiceDialogOpen = false
+            )
+        }
+        calculateScores()
+    }
+
+    fun addDice(color: String) {
+        val dice = Dice(6, color)
+        val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
+        tempDiceSetList.add(dice)
+        val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
+        _uiState.update { currentState ->
+            currentState.copy(
+                activeDiceSet = tempDiceSet
+            )
+        }
+    }
+
+    fun rollDice(){
+        val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
+        for (dice in tempDiceSetList){
+            dice.roll()
+        }
+        tempDiceSetList.shuffle()
+        val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
+        _uiState.update { currentState ->
+            currentState.copy(
+                activeDiceSet = tempDiceSet
+            )
+        }
+        calculateScores()
+    }
+
+    fun calculateScores(){
+        val tempDiceSetList = uiState.value.activeDiceSet.diceList
+        var sum = 0
+        var sumWhite = 0
+        var sumRed = 0
+        var sumBlue = 0
+        var sumGreen = 0
+        for (dice in tempDiceSetList){
+            sum += dice.getValue()
+            if (dice.getColor()== "white"){
+                sumWhite += dice.getValue()
+            }
+            if (dice.getColor()== "red"){
+                sumRed += dice.getValue()
+            }
+            if (dice.getColor()== "blue"){
+                sumBlue += dice.getValue()
+            }
+            if (dice.getColor()== "green"){
+                sumGreen += dice.getValue()
+            }
+        }
+        _uiState.update { currentState ->
+            currentState.copy(
+                scoreAll = sum,
+                scoreWhite = sumWhite,
+                scoreRed = sumRed,
+                scoreBlue = sumBlue,
+                scoreGreen = sumGreen
+            )
+
+        }
     }
 }
