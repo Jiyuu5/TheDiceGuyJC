@@ -130,7 +130,7 @@ class SetViewModel : ViewModel() {
         var sumGreen = 0
         for (dice in tempDiceSetList){
             sum += dice.getValue()
-            if (dice.getColor()== "white"){
+            if (dice.getColor()== "white" || dice.getColor()=="D4_white"){
                 sumWhite += dice.getValue()
             }
             if (dice.getColor()== "red"){

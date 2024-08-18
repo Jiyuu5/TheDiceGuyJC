@@ -57,8 +57,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                         .fillMaxWidth()
                         .weight(1f),
                     fontSize = 24.sp,
-                    color = colorResource(id = R.color.red),
-                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.red), offset = Offset.Zero,3.0f))
+                    color = colorResource(id = R.color.red)
                 )
             }
             if (setUiState.scoreBlue > 0 && (setUiState.scoreRed > 0 || setUiState.scoreGreen > 0 || setUiState.scoreWhite > 0 )){
@@ -68,8 +67,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                         .fillMaxWidth()
                         .weight(1f),
                     fontSize = 24.sp,
-                    color = colorResource(id = R.color.blue),
-                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.blue), offset = Offset.Zero,3.0f))
+                    color = colorResource(id = R.color.blue)
                 )
             }
             if (setUiState.scoreGreen > 0 && (setUiState.scoreBlue > 0 || setUiState.scoreRed > 0 || setUiState.scoreWhite > 0 )){
@@ -79,8 +77,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                         .fillMaxWidth()
                         .weight(1f),
                     fontSize = 24.sp,
-                    color = colorResource(id = R.color.green),
-                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.green), offset = Offset.Zero,3.0f))
+                    color = colorResource(id = R.color.green)
                 )
             }
             if (setUiState.scoreWhite > 0 && (setUiState.scoreBlue > 0 || setUiState.scoreGreen > 0 || setUiState.scoreRed > 0 )){
@@ -89,9 +86,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
-                    fontSize = 24.sp,
-                    color = colorResource(id = R.color.white),
-                    style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.white), offset = Offset.Zero,3.0f))
+                    fontSize = 24.sp
                 )
             }
 
