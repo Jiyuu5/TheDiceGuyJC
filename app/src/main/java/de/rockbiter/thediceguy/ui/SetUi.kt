@@ -51,7 +51,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     .weight(1f),
                 fontSize = 28.sp
             )
-            if (setUiState.scoreRed > 0){
+            if (setUiState.scoreRed > 0 && (setUiState.scoreBlue > 0 || setUiState.scoreGreen > 0 || setUiState.scoreWhite > 0 )){
                 Text(
                     text = setUiState.scoreRed.toString(),
                     modifier = Modifier
@@ -62,7 +62,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.red), offset = Offset.Zero,3.0f))
                 )
             }
-            if (setUiState.scoreBlue > 0){
+            if (setUiState.scoreBlue > 0 && (setUiState.scoreRed > 0 || setUiState.scoreGreen > 0 || setUiState.scoreWhite > 0 )){
                 Text(
                     text = setUiState.scoreBlue.toString(),
                     modifier = Modifier
@@ -73,7 +73,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.blue), offset = Offset.Zero,3.0f))
                 )
             }
-            if (setUiState.scoreGreen > 0){
+            if (setUiState.scoreGreen > 0 && (setUiState.scoreBlue > 0 || setUiState.scoreRed > 0 || setUiState.scoreWhite > 0 )){
                 Text(
                     text = setUiState.scoreGreen.toString(),
                     modifier = Modifier
@@ -84,7 +84,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     style = TextStyle(shadow = Shadow(color = colorResource(id = R.color.green), offset = Offset.Zero,3.0f))
                 )
             }
-            if (setUiState.scoreWhite > 0){
+            if (setUiState.scoreWhite > 0 && (setUiState.scoreBlue > 0 || setUiState.scoreGreen > 0 || setUiState.scoreRed > 0 )){
                 Text(
                     text = setUiState.scoreWhite.toString(),
                     modifier = Modifier

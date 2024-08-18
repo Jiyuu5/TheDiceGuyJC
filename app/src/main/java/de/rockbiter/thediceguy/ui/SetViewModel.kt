@@ -1,10 +1,6 @@
 package de.rockbiter.thediceguy.ui
 
-import android.app.Application
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import de.rockbiter.thediceguy.model.Dice
 import de.rockbiter.thediceguy.model.DiceSet
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +9,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.Timer
 import kotlin.concurrent.fixedRateTimer
-import kotlin.coroutines.coroutineContext
 
 private const val MAX_NUMBER_OF_DICE = 30
 
@@ -24,18 +19,6 @@ class SetViewModel : ViewModel() {
     val uiState: StateFlow<SetUiState> = _uiState.asStateFlow()
 
     private lateinit var timer: Timer
-
-//    init {
-//        loadSetPresets(0)
-//    }
-
-//    fun loadSetPresets(preset: Int) {
-//            _uiState.update { currentState ->
-//                currentState.copy(
-//                    activeDiceSet = dicePresets[preset]
-//                )
-//            }
-//    }
 
     fun clearDiceSet(){
         _uiState.update { currentState ->

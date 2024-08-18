@@ -8,6 +8,8 @@ data class SetUiState(
     val scoreRed: Int = 0,
     val scoreBlue: Int = 0,
     val scoreGreen: Int = 0,
+    val isScoreViewEnabled: Boolean = true,
+    val isDiceCountViewEnabled: Boolean = true,
     val isDiceDialogOpen: Boolean = false,
     val isRollButtonClickedFirst: Boolean = true,
     val textRollButton: String = "Roll",
