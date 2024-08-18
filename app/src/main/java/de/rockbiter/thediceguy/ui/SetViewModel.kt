@@ -1,5 +1,8 @@
 package de.rockbiter.thediceguy.ui
 
+import android.app.Application
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.rockbiter.thediceguy.model.Dice
@@ -10,6 +13,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.Timer
 import kotlin.concurrent.fixedRateTimer
+import kotlin.coroutines.coroutineContext
+
+private const val MAX_NUMBER_OF_DICE = 30
+
+
 
 class SetViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(SetUiState())
@@ -61,15 +69,21 @@ class SetViewModel : ViewModel() {
     }
 
     fun addDice(color: String) {
+
         val dice = Dice(6, color)
         val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
-        tempDiceSetList.add(dice)
-        val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
-        _uiState.update { currentState ->
-            currentState.copy(
-                activeDiceSet = tempDiceSet
-            )
+        if (tempDiceSetList.size < MAX_NUMBER_OF_DICE){
+            tempDiceSetList.add(dice)
+            val tempDiceSet = DiceSet(_uiState.value.activeDiceSet.name, tempDiceSetList)
+            _uiState.update { currentState ->
+                currentState.copy(
+                    activeDiceSet = tempDiceSet
+                )
+            }
+        } else {
+            // TODO: Implement Toast Message (don't know how to handle context in the ViewModel)
         }
+
     }
 
     fun rollDice(){
