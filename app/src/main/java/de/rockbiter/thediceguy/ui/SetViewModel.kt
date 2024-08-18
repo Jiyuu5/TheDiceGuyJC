@@ -51,9 +51,9 @@ class SetViewModel : ViewModel() {
         calculateScores()
     }
 
-    fun addDice(color: String) {
+    fun addDice(type: Int, color: String) {
 
-        val dice = Dice(6, color)
+        val dice = Dice(type, color)
         val tempDiceSetList = _uiState.value.activeDiceSet.diceList.toMutableList()
         if (tempDiceSetList.size < MAX_NUMBER_OF_DICE){
             tempDiceSetList.add(dice)

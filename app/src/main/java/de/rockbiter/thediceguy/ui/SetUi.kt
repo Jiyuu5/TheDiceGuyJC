@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -135,43 +134,52 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
     }
     if (setUiState.isDiceDialogOpen) {
         AlertDialog(
-            title = { Text(text = "Add Dice") },
+            title = { Text(text = "Add Dice", fontSize = 20.sp) },
             text = {
                 Row {
                     IconButton(onClick = {
-                        setViewModel.addDice("white")
+                        setViewModel.addDice(6,"white")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3),
-                            contentDescription = "White Dice"
+                            contentDescription = "White D6 Dice"
                         )
                     }
 
                     IconButton(onClick = {
-                        setViewModel.addDice("blue")
+                        setViewModel.addDice(6,"blue")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_blue),
-                            contentDescription = "White Dice"
+                            contentDescription = "Blue D6 Dice"
                         )
                     }
 
                     IconButton(onClick = {
-                        setViewModel.addDice("red")
+                        setViewModel.addDice(6,"red")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_red),
-                            contentDescription = "White Dice"
+                            contentDescription = "Red D6 Dice"
 
                         )
                     }
 
                     IconButton(onClick = {
-                        setViewModel.addDice("green")
+                        setViewModel.addDice(6,"green")
                     }) {
                         Image(
                             painter = painterResource(id = R.drawable.dice6_3_green),
-                            contentDescription = "White Dice"
+                            contentDescription = "Greem D6 Dice"
+                        )
+                    }
+
+                    IconButton(onClick = {
+                        setViewModel.addDice(4,"D4_white")
+                    }) {
+                        Image(
+                            painter = painterResource(id = R.drawable.dice4_3),
+                            contentDescription = "White D4 Dice"
                         )
                     }
                 }
