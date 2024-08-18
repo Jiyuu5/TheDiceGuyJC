@@ -11,6 +11,7 @@ Version History
 - added dice maximum of 30 dice
 - added app start icon
 - score view optimized
+- dice in grid view are now scalable
 
 
 

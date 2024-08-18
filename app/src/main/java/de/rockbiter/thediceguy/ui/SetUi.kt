@@ -43,8 +43,8 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
             .padding(8.dp)
             .fillMaxSize()
     ) {
-        Text(text = setUiState.activeDiceSet.name, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+        //Text(text = setUiState.activeDiceSet.name, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(start = 8.dp)) {
             Text(
                 text = setUiState.scoreAll.toString(), modifier = Modifier
                     .fillMaxWidth()
@@ -108,7 +108,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
 
         LazyVerticalGrid(
             state = LazyGridState(),
-            columns = GridCells.Adaptive(minSize = 48.dp),
+            columns = GridCells.Fixed(6),
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
