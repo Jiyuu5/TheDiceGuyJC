@@ -16,16 +16,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,7 +41,9 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
             .fillMaxSize()
     ) {
         //Text(text = setUiState.activeDiceSet.name, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(start = 8.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp)) {
             Text(
                 text = setUiState.scoreAll.toString(), modifier = Modifier
                     .fillMaxWidth()
@@ -112,9 +112,6 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
             }
         }
         Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            Button(onClick = { setViewModel.clearDiceSet() }) {
-                Text(text = "Delete")
-            }
             Button(onClick = {
                 setViewModel.openDiceDialog()
             }) {
@@ -129,68 +126,77 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
     }
     if (setUiState.isDiceDialogOpen) {
         AlertDialog(
-            title = { Text(text = "Add Dice", fontSize = 20.sp) },
-            text = {
-                Row {
-                    IconButton(onClick = {
-                        setViewModel.addDice(6,"white")
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.dice6_3),
-                            contentDescription = "White D6 Dice"
-                        )
+            title = { Text(text = "Dice Menu", fontSize = 20.sp) },
+            text =
+            {
+                Column {
+                    Row {
+                        IconButton(onClick = {
+                            setViewModel.addDice(6,"white")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice6_3),
+                                contentDescription = "White D6 Dice"
+                            )
+                        }
+
+                        IconButton(onClick = {
+                            setViewModel.addDice(6,"blue")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice6_3_blue),
+                                contentDescription = "Blue D6 Dice"
+                            )
+                        }
+
+                        IconButton(onClick = {
+                            setViewModel.addDice(6,"red")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice6_3_red),
+                                contentDescription = "Red D6 Dice"
+
+                            )
+                        }
+
+                        IconButton(onClick = {
+                            setViewModel.addDice(6,"green")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice6_3_green),
+                                contentDescription = "Green D6 Dice"
+                            )
+                        }
+
+                        IconButton(onClick = {
+                            setViewModel.addDice(4,"D4_white")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice4_3),
+                                contentDescription = "White D4 Dice"
+                            )
+                        }
                     }
-
-                    IconButton(onClick = {
-                        setViewModel.addDice(6,"blue")
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.dice6_3_blue),
-                            contentDescription = "Blue D6 Dice"
-                        )
-                    }
-
-                    IconButton(onClick = {
-                        setViewModel.addDice(6,"red")
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.dice6_3_red),
-                            contentDescription = "Red D6 Dice"
-
-                        )
-                    }
-
-                    IconButton(onClick = {
-                        setViewModel.addDice(6,"green")
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.dice6_3_green),
-                            contentDescription = "Greem D6 Dice"
-                        )
-                    }
-
-                    IconButton(onClick = {
-                        setViewModel.addDice(4,"D4_white")
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.dice4_3),
-                            contentDescription = "White D4 Dice"
-                        )
+                    Row (
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        TextButton(onClick = { setViewModel.clearDiceSet() }) {
+                            Text(text = "Delete All")
+                        }
+                        TextButton(onClick = { setViewModel.closeDiceDialog() }) {
+                            Text(text = "Dismiss")
+                        }
                     }
                 }
+
 
             },
             onDismissRequest = {
                 setViewModel.closeDiceDialog()
             },
-            confirmButton = {
-                Button(onClick = {
-                    setViewModel.closeDiceDialog()
-                }
-                ) {
-                    Text(text = "Close")
-                }
-            })
+            confirmButton = { })
     }
 
 
