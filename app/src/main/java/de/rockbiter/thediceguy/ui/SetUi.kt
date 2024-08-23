@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -221,7 +222,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                 ) {
                     Text(text = "Dice Menu", fontSize = 20.sp, modifier = Modifier.padding(8.dp))
                     Row {
-                        IconButton(onClick = {
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
                             setViewModel.addDice(6, "white")
                         }) {
                             Image(
@@ -230,7 +231,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                             )
                         }
 
-                        IconButton(onClick = {
+                        IconButton(modifier = Modifier.width(64.dp),onClick = {
                             setViewModel.addDice(6, "blue")
                         }) {
                             Image(
@@ -239,7 +240,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                             )
                         }
 
-                        IconButton(onClick = {
+                        IconButton(modifier = Modifier.width(64.dp),onClick = {
                             setViewModel.addDice(6, "red")
                         }) {
                             Image(
@@ -249,7 +250,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                             )
                         }
 
-                        IconButton(onClick = {
+                        IconButton(modifier = Modifier.width(64.dp),onClick = {
                             setViewModel.addDice(6, "green")
                         }) {
                             Image(
@@ -259,7 +260,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                         }
                     }
                     Row {
-                        IconButton(onClick = {
+                        IconButton(modifier = Modifier.width(64.dp),onClick = {
                             setViewModel.addDice(4, "D4_white")
                         }) {
                             Image(
