@@ -2,6 +2,7 @@ package de.rockbiter.thediceguy.ui
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -23,7 +24,8 @@ fun MainUi() {
     val navController : NavHostController = rememberNavController()
 
 
-    Scaffold (bottomBar = {BottomNavigationBar(navController)},
+    Scaffold (
+        bottomBar = {BottomNavigationBar(navController)},
         modifier = Modifier
     ){
         contentPadding ->
