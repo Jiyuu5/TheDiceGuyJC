@@ -15,6 +15,7 @@ Version History
 - changed Dice Menu UI
 - changed button styles
 - added Main Menu (dummy only, not usable)
+- added content description to dice items on screen
 
 0.1.1
 - added dice maximum of 30 dice

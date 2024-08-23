@@ -6,6 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 
 @Composable
-fun DiceItem(imageResource: Int, modifier: Modifier){
-    Image(painter = painterResource(id = imageResource), contentDescription = "", modifier)
+fun DiceItem(imageResource: Int,contentDescription: String, modifier: Modifier){
+    Image(painter = painterResource(id = imageResource), contentDescription = contentDescription, modifier)
 }

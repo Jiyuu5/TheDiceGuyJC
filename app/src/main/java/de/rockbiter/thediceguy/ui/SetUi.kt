@@ -45,7 +45,6 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
             .padding(8.dp)
             .fillMaxSize()
     ) {
-        //Text(text = setUiState.activeDiceSet.name, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         Row(
             verticalAlignment = Alignment.CenterVertically, modifier = Modifier
                 .fillMaxWidth()
@@ -117,7 +116,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                 .weight(1f)
         ) {
             items(setUiState.activeDiceSet.diceList) {
-                DiceItem(imageResource = it.getImageResource(), Modifier.padding(4.dp))
+                DiceItem(imageResource = it.getImageResource(), contentDescription = it.getColor() + " Dice", Modifier.padding(4.dp))
             }
         }
         Row(horizontalArrangement = Arrangement.SpaceBetween,
