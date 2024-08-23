@@ -12,11 +12,13 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -118,14 +120,22 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                 DiceItem(imageResource = it.getImageResource(), Modifier.padding(4.dp))
             }
         }
-        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+        Row(horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Bottom,
+            modifier = Modifier.fillMaxWidth()) {
             FloatingActionButton(modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
                 onClick = { setViewModel.openDiceDialog() }
             ) {
-                Text(text = "Dice")
+                Image(
+                    modifier = Modifier.width(36.dp),
+                    painter = painterResource(id = R.drawable.dice6_3),
+                    contentDescription = "White D6 Dice"
+                )
             }
-            FloatingActionButton(modifier = Modifier.padding(end = 16.dp, bottom = 16.dp),
-                onClick = { setViewModel.rollDice() }
+            LargeFloatingActionButton(
+                modifier = Modifier.padding(end = 16.dp, bottom = 16.dp),
+                onClick = { setViewModel.rollDice() },
+                shape = CircleShape
             ) {
                 Text(text = setUiState.textRollButton, fontSize = 18.sp)
             }
@@ -145,7 +155,11 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(8.dp)
                 ) {
-                    Text(text = "Dice Menu", fontSize = 20.sp, modifier = Modifier.padding(8.dp))
+                    Text(
+                        text = "Dice Menu",
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
+                    )
                     Row {
                         IconButton(modifier = Modifier.width(64.dp), onClick = {
                             setViewModel.addDice(6, "white")
@@ -156,7 +170,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                             )
                         }
 
-                        IconButton(modifier = Modifier.width(64.dp),onClick = {
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
                             setViewModel.addDice(6, "blue")
                         }) {
                             Image(
@@ -165,7 +179,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                             )
                         }
 
-                        IconButton(modifier = Modifier.width(64.dp),onClick = {
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
                             setViewModel.addDice(6, "red")
                         }) {
                             Image(
@@ -175,7 +189,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                             )
                         }
 
-                        IconButton(modifier = Modifier.width(64.dp),onClick = {
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
                             setViewModel.addDice(6, "green")
                         }) {
                             Image(
@@ -185,7 +199,7 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                         }
                     }
                     Row {
-                        IconButton(modifier = Modifier.width(64.dp),onClick = {
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
                             setViewModel.addDice(4, "D4_white")
                         }) {
                             Image(
