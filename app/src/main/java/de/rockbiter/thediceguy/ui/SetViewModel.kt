@@ -133,13 +133,13 @@ class SetViewModel : ViewModel() {
             if (dice.getColor()== "white" || dice.getColor()=="D4_white"){
                 sumWhite += dice.getValue()
             }
-            if (dice.getColor()== "red"){
+            if (dice.getColor()== "red" || dice.getColor()=="D4_red"){
                 sumRed += dice.getValue()
             }
-            if (dice.getColor()== "blue"){
+            if (dice.getColor()== "blue" || dice.getColor()=="D4_blue"){
                 sumBlue += dice.getValue()
             }
-            if (dice.getColor()== "green"){
+            if (dice.getColor()== "green" || dice.getColor()=="D4_green"){
                 sumGreen += dice.getValue()
             }
         }

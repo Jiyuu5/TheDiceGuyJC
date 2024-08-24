@@ -206,6 +206,33 @@ fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
                                 contentDescription = "White D4 Dice"
                             )
                         }
+
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
+                            setViewModel.addDice(4, "D4_blue")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice4_3_blue),
+                                contentDescription = "Blue D4 Dice"
+                            )
+                        }
+
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
+                            setViewModel.addDice(4, "D4_green")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice4_3_green),
+                                contentDescription = "#Green D4 Dice"
+                            )
+                        }
+
+                        IconButton(modifier = Modifier.width(64.dp), onClick = {
+                            setViewModel.addDice(4, "D4_red")
+                        }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.dice4_3_red),
+                                contentDescription = "Red D4 Dice"
+                            )
+                        }
                     }
                     Row(
                         modifier = Modifier

@@ -21,6 +21,15 @@ class Dice (type: Int, private var color: String = "white"){
             "D4_white" -> {
                 imageResources = diceImageResources["D4_white"]
             }
+            "D4_blue" -> {
+                imageResources = diceImageResources["D4_blue"]
+            }
+            "D4_green" -> {
+                imageResources = diceImageResources["D4_green"]
+            }
+            "D4_red" -> {
+                imageResources = diceImageResources["D4_red"]
+            }
         }
     }
 

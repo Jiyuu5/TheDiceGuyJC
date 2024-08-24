@@ -7,6 +7,10 @@ This app is a dice roller for pen and paper and table top games.
 Version History
 --------------
 
+0.1.3
+- added new D4 dice skin
+- added Coins
+
 0.1.2
 - fixed score display bug
 - added white D4 dice

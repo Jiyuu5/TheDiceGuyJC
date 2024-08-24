@@ -46,7 +46,28 @@ val diceImageResources = mapOf(
         R.drawable.dice4_2,
         R.drawable.dice4_3,
         R.drawable.dice4_4
-    )
+    ),
+
+    "D4_blue" to intArrayOf(
+        R.drawable.dice4_1_blue,
+        R.drawable.dice4_2_blue,
+        R.drawable.dice4_3_blue,
+        R.drawable.dice4_4_blue
+    ),
+
+    "D4_green" to intArrayOf(
+        R.drawable.dice4_1_green,
+        R.drawable.dice4_2_green,
+        R.drawable.dice4_3_green,
+        R.drawable.dice4_4_green
+    ),
+
+    "D4_red" to intArrayOf(
+        R.drawable.dice4_1_red,
+        R.drawable.dice4_2_red,
+        R.drawable.dice4_3_red,
+        R.drawable.dice4_4_red
+    ),
 )
 
 
