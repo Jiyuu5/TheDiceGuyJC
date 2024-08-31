@@ -9,6 +9,7 @@ Version History
 
 0.1.3
 - added new D4 dice skins
+- bug fixing
 
 0.1.2
 - fixed score display bug

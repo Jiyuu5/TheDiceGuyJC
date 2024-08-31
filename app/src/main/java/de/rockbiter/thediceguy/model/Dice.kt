@@ -34,7 +34,7 @@ class Dice (type: Int, private var color: String = "white"){
     }
 
     fun roll():Int{
-        value = Random.nextInt(1, diceType)
+        value = Random.nextInt(1, diceType + 1)
         return imageResources?.get(value - 1) ?: 1
     }
 
