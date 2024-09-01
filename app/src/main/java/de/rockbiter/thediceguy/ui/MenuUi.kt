@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.rockbiter.thediceguy.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuUi(){
     Column (modifier = Modifier.padding(8.dp)){
@@ -40,12 +38,12 @@ fun MenuUi(){
 
 
 
-        MenuItemSwitch(title = "Enable dice auto roll",
+        MenuItemSwitch(title = "Dice auto roll",
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()
         )
-        MenuItemSwitch(title = "Show colored score board",
+        MenuItemSwitch(title = "Colored score board",
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()

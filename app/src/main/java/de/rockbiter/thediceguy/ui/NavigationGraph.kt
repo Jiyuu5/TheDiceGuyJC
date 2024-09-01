@@ -1,7 +1,6 @@
 package de.rockbiter.thediceguy.ui
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,13 +9,13 @@ import androidx.navigation.compose.composable
 fun NavigationGraph(navController: NavHostController){
     NavHost(navController = navController, startDestination = Routes.Set1.route) {
         composable(Routes.Set1.route){
-            SetUi(set = 0)
+            SetUi()
         }
         composable(Routes.Set2.route){
-            SetUi(set = 1)
+            SetUi()
         }
         composable(Routes.Set3.route){
-            SetUi(set = 2)
+            SetUi()
         }
         composable(Routes.HistoryUi.route){
             HistoryUi()

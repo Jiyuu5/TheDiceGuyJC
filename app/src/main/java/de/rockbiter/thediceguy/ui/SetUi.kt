@@ -37,7 +37,7 @@ import de.rockbiter.thediceguy.R
 
 
 @Composable
-fun SetUi(set: Int, setViewModel: SetViewModel = viewModel()) {
+fun SetUi(setViewModel: SetViewModel = viewModel()) {
     val setUiState by setViewModel.uiState.collectAsState()
 
     Column(
