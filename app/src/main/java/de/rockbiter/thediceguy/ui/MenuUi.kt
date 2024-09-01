@@ -6,24 +6,40 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import de.rockbiter.thediceguy.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuUi(){
     Column (modifier = Modifier.padding(8.dp)){
-      CenterAlignedTopAppBar(title = {
-          Text(text = "Main Menu Settings")
-      })
+
+          Row (verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+              .padding(8.dp)
+              .fillMaxWidth()){
+              Text(text = "Main Menu Settings", fontSize = 24.sp)
+              IconButton(
+                  onClick = { /*TODO*/ }) {
+                  Icon(
+                      painter = painterResource(id = R.drawable.more_vert_32),
+                      contentDescription = "Main Menu Options"
+                  )
+              }
+          }
+
+
+
         MenuItemSwitch(title = "Enable dice auto roll",
             modifier = Modifier
                 .padding(8.dp)

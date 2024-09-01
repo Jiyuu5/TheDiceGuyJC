@@ -4,6 +4,7 @@ Version History
 0.1.4
 - updated targetSDK to 35
 - updated Kotlin Version
+- added Main Menu Options Button
 
 0.1.3
 - added new D4 dice skins
