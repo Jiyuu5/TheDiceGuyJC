@@ -7,6 +7,9 @@ This app is a dice roller for pen and paper and table top games.
 Version History
 --------------
 
+0.1.4
+- 
+
 0.1.3
 - added new D4 dice skins
 - bug fixing
